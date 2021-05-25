@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+
+	<head>
+		<title>MyCodeBlog</title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"/>
+	</head>
+	
+	<body>
+		<header>
+			<nav style="height:auto; min-height: 60px" class="navbar navbar-light bg-light">
+			  <div class="container-fluid">
+			    <a href="/posts" style="text-decoration: none; color: black"><span class="navbar-brand mb-0 h1" style="font-weight: bold">MyCodeBlog</span></a>
+			    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+				  <a href="/newpost"><button class="btn btn-primary" type="button">Novo Post</button></a>
+				</div>
+			  </div>
+			</nav>
+		</header>
+	
+		<section>
+			<div class="container" style="width: 60%; padding-bottom: 30px">
+			
+				<nav aria-label="breadcrumb" style="padding-top: 30px">
+				  <ol class="breadcrumb">
+				    <li class="breadcrumb-item active" aria-current="page">Posts</li>
+				  </ol>
+				</nav>
+				
+				<th:block th:include="mensagemDeletado"></th:block>
+				
+				<div class="card shadow-sm bg-white rounded" style="margin-top: 20px" th:each="post : ${posts}">
+				  <div class="card-body">
+				    <h5 class="card-title" style="font-weight: bold; padding-top: 5px"><a style= "color: black; text-decoration: none" th:href="@{'/posts/' + ${post.id}}"><span th:text="${post.titulo}"></span></a></h5>
+				    <h6 class="card-subtitle mb-2 text-muted">
+						<span th:text="${post.autor}"></span>,
+						<span th:text="${post.data}"></span>
+					</h6>
+				    <p class="card-text"><span th:text="${#strings.abbreviate(post.text, 400)}"></span></p>
+				  </div>
+				</div>
+				
+			</div>
+		</section>
+			
+	</body>
+
+</html>
